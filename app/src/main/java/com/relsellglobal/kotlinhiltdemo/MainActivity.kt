@@ -1,23 +1,55 @@
 package com.relsellglobal.kotlinhiltdemo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
-import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.relsellglobal.flowdemoapplication.ui.theme.KotlinWeatherDataUI2Theme
 
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-
-    private val TAG = "MainActivity"
-
-    @Inject
-    lateinit var someRandomString : String
-
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContent {
+            KotlinWeatherDataUI2Theme {
+                // A surface container using the 'background' color from the theme
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+                    initialView()
+                }
+            }
+        }
+    }
+}
 
-        Log.v(TAG,"$someRandomString")
+@Composable
+fun Greeting(name: String) {
+    Text(text = "$name!")
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    KotlinWeatherDataUI2Theme {
+        initialView()
+    }
+}
+
+@Composable
+fun initialView() {
+    Column {
+        Greeting("Anil")
+        Greeting("Sunil")
+
+        Row {
+            Greeting("Anil")
+            Greeting("Sunil")
+        }
     }
 }

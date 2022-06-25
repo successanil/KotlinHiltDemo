@@ -2,25 +2,28 @@ package com.relsellglobal.kotlinhiltdemo.uicomponents
 
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
 
 class UIElements {
 
@@ -29,7 +32,7 @@ class UIElements {
         @Composable
         fun ScaffoldDemo() {
             val materialBlue700 = Color(0xFF1976D2)
-            val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Open))
+            val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
             Scaffold(
                 scaffoldState = scaffoldState,
                 topBar = {
@@ -55,6 +58,7 @@ class UIElements {
                 drawerContent = { Text(text = "drawerContent") },
                 content = {
                     Column() {
+                        WelcomeCard()
                         addSearchBox()
                         loadList()
                     }
@@ -91,23 +95,91 @@ class UIElements {
         @Composable
         fun addSearchBox() {
             var text by remember { mutableStateOf(TextFieldValue("")) }
-            Row {
+            Row (modifier = Modifier.padding(start=16.dp,end=16.dp,top = 16.dp)) {
 
-                TextField(
-                    value = text,
-                    onValueChange = { newText ->
-                        text = newText
-                    }
-                )
+                Row(modifier = Modifier
+                    .weight(1.4f, true)
+                    .border(1.dp,Color.Green)
+                    .height(60.dp)
 
-                Button(onClick = { }) {
+                ) {
+
+                        OutlinedTextField(
+                            modifier = Modifier
+                                .fillMaxHeight()
+                            ,
+                            shape = RoundedCornerShape(8.dp),
+                            singleLine = true,
+                            placeholder = { Text("Enter Search term") },
+                            label  = { Text("Enter Search term") },
+                            value = text,
+                            onValueChange = { newText ->
+                                text = newText
+                            }
+                        )
 
                 }
+
+                Row(modifier = Modifier
+                    .height(60.dp)
+                    .border(1.dp,Color.Red)
+                    .weight(0.6f, true),
+                    verticalAlignment = Alignment.CenterVertically
+
+                ) {
+
+                        Button(onClick = { },
+                            modifier = Modifier
+                                .fillMaxWidth()) {
+                            Icon(Icons.Filled.Search,"",tint=Color.White)
+                        }
+
+                }
+
+
+
+
 
             }
 
 
         }
+
+        @Composable
+        fun WelcomeCard() {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(15.dp)
+                    .clickable { },
+                elevation = 10.dp
+            ) {
+                Column(
+                    modifier = Modifier.padding(15.dp)
+                ) {
+                    Text(
+                        buildAnnotatedString {
+                            append("welcome to ")
+                            withStyle(style = SpanStyle(fontWeight = FontWeight.W900, color = Color(0xFF4552B8))
+                            ) {
+                                append("Jetpack Compose Playground")
+                            }
+                        }
+                    )
+                    Text(
+                        buildAnnotatedString {
+                            append("Now you are in the ")
+                            withStyle(style = SpanStyle(fontWeight = FontWeight.W900)) {
+                                append("Card")
+                            }
+                            append(" section")
+                        }
+                    )
+                }
+            }
+        }
+
+
     }
 
 }

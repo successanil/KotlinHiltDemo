@@ -3,6 +3,7 @@ package com.relsellglobal.kotlinhiltdemo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -18,18 +19,21 @@ import androidx.compose.ui.unit.sp
 import com.relsellglobal.flowdemoapplication.ui.theme.KotlinWeatherDataUI2Theme
 import com.relsellglobal.kotlinhiltdemo.uicomponents.UIElements
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MaterialTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-                    initialView()
+//        setContent {
+//            MaterialTheme {
+//                // A surface container using the 'background' color from the theme
+//                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+//                    initialView()
+//
+//                }
+//            }
+//        }
+        setContentView(R.layout.activity_main)
+        supportFragmentManager.beginTransaction().replace(R.id.rootL,ComposeDemoFrgment()).commit()
 
-                }
-            }
-        }
     }
 }
 

@@ -97,44 +97,21 @@ class UIElements {
             var text by remember { mutableStateOf(TextFieldValue("")) }
             Row (modifier = Modifier.padding(start=16.dp,end=16.dp,top = 16.dp)) {
 
-                Row(modifier = Modifier
-                    .weight(1.4f, true)
-                    .border(1.dp,Color.Green)
-                    .height(60.dp)
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                    ,
+                    shape = RoundedCornerShape(8.dp),
+                    singleLine = true,
+                    placeholder = { Text("Enter Search term") },
+                    label  = { Text("Enter Search term") },
+                    value = text,
+                    onValueChange = { newText ->
+                        text = newText
+                    }
+                )
 
-                ) {
-
-                        OutlinedTextField(
-                            modifier = Modifier
-                                .fillMaxHeight()
-                            ,
-                            shape = RoundedCornerShape(8.dp),
-                            singleLine = true,
-                            placeholder = { Text("Enter Search term") },
-                            label  = { Text("Enter Search term") },
-                            value = text,
-                            onValueChange = { newText ->
-                                text = newText
-                            }
-                        )
-
-                }
-
-                Row(modifier = Modifier
-                    .height(60.dp)
-                    .border(1.dp,Color.Red)
-                    .weight(0.6f, true),
-                    verticalAlignment = Alignment.CenterVertically
-
-                ) {
-
-                        Button(onClick = { },
-                            modifier = Modifier
-                                .fillMaxWidth()) {
-                            Icon(Icons.Filled.Search,"",tint=Color.White)
-                        }
-
-                }
+                //removedRowLayoutSearchbox()
 
 
 
@@ -143,6 +120,48 @@ class UIElements {
             }
 
 
+        }
+
+        @Composable
+        private fun removedRowLayoutSearchbox() {
+//            Row(modifier = Modifier
+//                .weight(1.4f, true)
+//                .border(1.dp,Color.Green)
+//                .height(60.dp)
+//
+//            ) {
+//
+//                OutlinedTextField(
+//                    modifier = Modifier
+//                        .fillMaxHeight()
+//                    ,
+//                    shape = RoundedCornerShape(8.dp),
+//                    singleLine = true,
+//                    placeholder = { Text("Enter Search term") },
+//                    label  = { Text("Enter Search term") },
+//                    value = text,
+//                    onValueChange = { newText ->
+//                        text = newText
+//                    }
+//                )
+//
+//            }
+//
+//            Row(modifier = Modifier
+//                .height(60.dp)
+//                .border(1.dp,Color.Red)
+//                .weight(0.6f, true),
+//                verticalAlignment = Alignment.CenterVertically
+//
+//            ) {
+//
+//                Button(onClick = { },
+//                    modifier = Modifier
+//                        .fillMaxWidth()) {
+//                    Icon(Icons.Filled.Search,"",tint=Color.White)
+//                }
+//
+//            }
         }
 
         @Composable
@@ -159,20 +178,20 @@ class UIElements {
                 ) {
                     Text(
                         buildAnnotatedString {
-                            append("welcome to ")
+                            append("Welcome to ")
                             withStyle(style = SpanStyle(fontWeight = FontWeight.W900, color = Color(0xFF4552B8))
                             ) {
-                                append("Jetpack Compose Playground")
+                                append("Book Search App")
                             }
                         }
                     )
                     Text(
                         buildAnnotatedString {
-                            append("Now you are in the ")
+                            append("You can search ")
                             withStyle(style = SpanStyle(fontWeight = FontWeight.W900)) {
-                                append("Card")
+                                append("books")
                             }
-                            append(" section")
+                            append(" here")
                         }
                     )
                 }

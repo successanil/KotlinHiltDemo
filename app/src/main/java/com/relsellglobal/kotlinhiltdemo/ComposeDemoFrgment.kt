@@ -139,7 +139,7 @@ class ComposeDemoFrgment constructor(val bookListModel: BookListModel) : Fragmen
 
 //                        WelcomeCard()
                         LazyColumn {
-                            items(result.data.items) { response ->
+                            items(result.data) { response ->
                                 // each row (response)
 //                        val scrollState = rememberScrollState()
                                 val painter = painterResource(id = R.drawable.ic_launcher_background)

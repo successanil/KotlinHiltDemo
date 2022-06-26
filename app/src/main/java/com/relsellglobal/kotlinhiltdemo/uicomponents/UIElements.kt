@@ -26,6 +26,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import android.util.Log
+import com.relsellglobal.kotlinhiltdemo.R
+import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
+import com.relsellglobal.kotlinhiltdemo.repositories.network.VolumeInfo
 
 
 class UIElements {
@@ -64,6 +67,53 @@ class UIElements {
 //                        WelcomeCard()
                         addSearchBox()
                         loadList()
+                    }
+                },
+                bottomBar = {
+//                    BottomAppBar(backgroundColor = materialBlue700) { Text("BottomAppBar") }
+                }
+            )
+        }
+
+        @Composable
+        fun ScaffoldNetworkList(title : String) {
+            val materialBlue700 = Color(0xFF1976D2)
+            val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
+            Scaffold(
+                scaffoldState = scaffoldState,
+                topBar = {
+                    TopAppBar(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(bottomStart = 8.dp, bottomEnd = 8.dp))
+                    ) {
+                        IconButton(
+                            onClick = {
+                                //scope.launch { scaffoldState.drawerState.open() }
+                            }
+                        ) {
+                            Icon(Icons.Filled.Menu, "")
+                        }
+                    }
+                },
+                floatingActionButtonPosition = FabPosition.End,
+                floatingActionButton = {
+//                    FloatingActionButton(onClick = {}) {
+//                        Text("X")
+//                    }
+                },
+                drawerContent = { Text(text = "drawerContent") },
+                content = {
+                    val scrollState = rememberScrollState()
+                    val painter = painterResource(id = R.drawable.ic_launcher_background)
+                    val description = "Hello painter"
+
+                    Column( modifier = Modifier.verticalScroll(scrollState) ) {
+//                        WelcomeCard()
+                        ImageCardWithNetworkData(
+                            painter = painter, contentDescription = description,
+                            title = title
+                        )
+
                     }
                 },
                 bottomBar = {
@@ -293,6 +343,92 @@ class UIElements {
                                 Text("Big Ideas Simply Explained", style = TextStyle(color = Color.Gray, fontSize = 10.sp))
                             }
                             
+                            Spacer(modifier = Modifier.height(2.dp))
+
+                            Row(
+
+                            ) {
+
+                                Column( horizontalAlignment = Alignment.CenterHorizontally) {
+
+                                    Button(
+                                        onClick = {  launchCheck() },
+
+//                                        )
+                                    ) {
+                                        // Inner content including an icon and a text label
+                                        Icon(
+                                            Icons.Filled.Done,
+                                            contentDescription = "Details",
+                                            modifier = Modifier.size(ButtonDefaults.IconSize)
+                                        )
+                                        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                                        Text("Details")
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+        @Composable
+        fun ImageCardWithNetworkData(
+            painter: Painter,
+            contentDescription: String,
+            title: String,
+            modifier: Modifier = Modifier
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+
+
+                Card(
+                    modifier = modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(2.dp),
+                    elevation = 5.dp
+                ) {
+                    Row(modifier = Modifier.fillMaxWidth()) {
+
+
+                        // when we want to put content stack over each other
+                        Box(
+                            modifier = Modifier
+                                .height(90.dp)
+                                .padding(5.dp)
+                        ) {
+                            Image(
+                                modifier = Modifier
+                                    .width(64.dp)
+                                    .clip(RoundedCornerShape(5.dp))
+                                    .fillMaxHeight(),
+                                painter = painter,
+                                contentDescription = contentDescription,
+                                contentScale = ContentScale.Crop
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .width(64.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(title, style = TextStyle(color = Color.White, fontSize = 12.sp))
+                            }
+                        }
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Column(
+
+                        ) {
+                            Column(
+
+                            ) {
+
+
+                                Text(title, style = TextStyle(color = Color.Black, fontSize = 16.sp))
+                                Text("Big Ideas Simply Explained", style = TextStyle(color = Color.Gray, fontSize = 10.sp))
+                            }
+
                             Spacer(modifier = Modifier.height(2.dp))
 
                             Row(

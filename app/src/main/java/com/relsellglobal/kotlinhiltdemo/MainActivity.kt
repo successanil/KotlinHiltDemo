@@ -1,11 +1,16 @@
 package com.relsellglobal.kotlinhiltdemo
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import com.relsellglobal.kotlinhiltdemo.uicomponents.UIElements
+import com.relsellglobal.kotlinhiltdemo.util.ApiState
+import com.relsellglobal.kotlinhiltdemo.viewmodels.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -14,6 +19,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var fragmentFactory: DefaultFragmentFactory
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +39,10 @@ fun Greeting(name: String) {
 
 
 @Composable
-fun initialView() {
-    UIElements.ScaffoldDemo()
+fun initialView(mainActivityViewModel: MainActivityViewModel) {
+    //UIElements.ScaffoldDemo()
+//    GetBooksList(mainActivityViewModel)
 }
+
+
 

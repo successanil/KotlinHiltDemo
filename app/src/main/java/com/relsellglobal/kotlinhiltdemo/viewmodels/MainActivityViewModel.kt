@@ -1,52 +1,37 @@
 package com.relsellglobal.kotlinhiltdemo.viewmodels
 
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
-import com.relsellglobal.kotlinhiltdemo.repositories.network.RetroInstance
-import com.relsellglobal.kotlinhiltdemo.repositories.network.RetroService
-import io.reactivex.Observer
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import androidx.lifecycle.viewModelScope
+import com.relsellglobal.kotlinhiltdemo.repositories.BooksApiRepository
+import com.relsellglobal.kotlinhiltdemo.util.ApiState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainActivityViewModel: ViewModel() {
-    lateinit var bookList: MutableLiveData<BookListModel>
+@HiltViewModel
+class MainActivityViewModel
+    @Inject constructor(val booksApiRepository: BooksApiRepository): ViewModel() {
+    var response: MutableState<ApiState> =  mutableStateOf(ApiState.Empty)
+
     init {
-        bookList = MutableLiveData()
+        getBooksListFromApi("business")
     }
 
-    fun getBookListObserver(): MutableLiveData<BookListModel> {
-        return bookList
+    fun getBooksListFromApi(queryString : String) = viewModelScope.launch {
+        booksApiRepository.getBooksListFromApi(queryString)
+            .onStart {
+                response.value = ApiState.Loading
+            }.catch { it ->
+                response.value = ApiState.Failure(it)
+            }.collect {
+
+                response.value  = ApiState.Success(it)
+            }
     }
 
-    fun makeApiCall(query: String) {
 
-        val retroInstance  = RetroInstance.getRetroInstance().create(RetroService::class.java)
-        retroInstance.getBookListFromApi(query)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(getBookListObserverRx())
-    }
-
-    private fun getBookListObserverRx():Observer<BookListModel> {
-        return object :Observer<BookListModel>{
-            override fun onComplete() {
-                //hide progress indicator .
-            }
-
-            override fun onError(e: Throwable) {
-                bookList.postValue(null)
-            }
-
-            override fun onNext(t: BookListModel) {
-                bookList.postValue(t)
-            }
-
-            override fun onSubscribe(d: Disposable) {
-                //start showing progress indicator.
-            }
-        }
-    }
 }

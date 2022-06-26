@@ -262,6 +262,7 @@ class UIElements {
                         Image(
                             modifier = Modifier
                                 .width(64.dp)
+                                .clip(RoundedCornerShape(5.dp))
                                 .fillMaxHeight(),
                             painter = painter,
                             contentDescription = contentDescription,

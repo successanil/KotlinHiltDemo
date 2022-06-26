@@ -312,18 +312,9 @@ class UIElements {
                         // when we want to put content stack over each other
                         Box(
                             modifier = Modifier
-                                .height(90.dp)
+                                .height(50.dp)
                                 .padding(5.dp)
                         ) {
-                            Image(
-                                modifier = Modifier
-                                    .width(64.dp)
-                                    .clip(RoundedCornerShape(5.dp))
-                                    .fillMaxHeight(),
-                                painter = painter,
-                                contentDescription = contentDescription,
-                                contentScale = ContentScale.Crop
-                            )
                             Box(
                                 modifier = Modifier
                                     .width(64.dp),
@@ -373,6 +364,54 @@ class UIElements {
                     }
 
                 }
+            }
+
+        }
+
+        @Composable
+        fun MenuCard(
+            painter: Painter,
+            contentDescription: String,
+            title: String,
+            modifier: Modifier = Modifier
+        ) {
+            Column(modifier = Modifier.padding(16.dp,5.dp,16.dp,5.dp)) {
+
+
+
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+
+                    ) {
+                        Column(
+
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.Start,
+                            ) {
+
+
+                                Text("Menu Item", style = TextStyle(color = Color.Black, fontSize = 16.sp))
+
+                            }
+
+                            Spacer(modifier = Modifier.height(5.dp))
+
+                            Row(
+
+                            ) {
+
+                                Column(
+                                    modifier = Modifier.background(Color.LightGray)
+                                        .fillMaxWidth()
+                                        .height(1.dp)
+                                ) {
+                                }
+                            }
+                        }
+                    }
+
+
             }
 
         }

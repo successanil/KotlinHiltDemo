@@ -5,7 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -15,6 +19,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -25,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
+import com.relsellglobal.kotlinhiltdemo.uicomponents.DrawerHeader
 import com.relsellglobal.kotlinhiltdemo.uicomponents.UIElements
 import com.relsellglobal.kotlinhiltdemo.util.ApiState
 import com.relsellglobal.kotlinhiltdemo.viewmodels.MainActivityViewModel
@@ -59,7 +65,15 @@ class ComposeDemoFrgment constructor(val bookListModel: BookListModel) : Fragmen
     fun GetBooksList(mainActivityViewModel: MainActivityViewModel) {
         when (val result = mainActivityViewModel.response.value) {
             is ApiState.Loading -> {
-                CircularProgressIndicator()
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.White)
+                ) {
+                    CircularProgressIndicator()
+                }
+
             }
             is ApiState.Success -> {
                 //print(result.data.items[0])
@@ -88,7 +102,35 @@ class ComposeDemoFrgment constructor(val bookListModel: BookListModel) : Fragmen
 //                        Text("X")
 //                    }
                     },
-                    drawerContent = { Text(text = "drawerContent") },
+                    drawerContent = {
+
+                        val scrollState = rememberScrollState()
+                        val painter = painterResource(id = R.drawable.ic_launcher_background)
+                        val description = "Hello painter"
+                        val title = "Menu title"
+                        Column(
+                            modifier = Modifier.verticalScroll(scrollState)
+                        ) {
+                            DrawerHeader.showHeader(painter = painter, contentDescription = description, title = title)
+                            for (i in 1..5) {
+                                UIElements.MenuCard(painter = painter, contentDescription = description, title = title)
+//                    BooksIndividualItemUI()
+//                    Text(
+//                        text = "Item $i",
+//                        fontSize = 24.sp,
+//                        fontWeight = FontWeight.Bold,
+//                        textAlign = TextAlign.Center,
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .padding(vertical = 24.dp)
+//
+//
+//                    )
+                            }
+
+                        }
+
+                    },
                     content = {
                         val scrollState = rememberScrollState()
                         val painter = painterResource(id = R.drawable.ic_launcher_background)

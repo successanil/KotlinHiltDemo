@@ -9,9 +9,10 @@ import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
+import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
 import com.relsellglobal.kotlinhiltdemo.uicomponents.UIElements
 
-class ComposeDemoFrgment : Fragment() {
+class ComposeDemoFrgment constructor(val bookListModel: BookListModel) : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         //return super.onCreateView(inflater, container, savedInstanceState)
         return ComposeView(requireContext()).apply {

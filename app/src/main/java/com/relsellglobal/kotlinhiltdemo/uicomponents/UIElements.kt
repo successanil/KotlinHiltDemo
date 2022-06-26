@@ -15,7 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
@@ -45,7 +49,7 @@ class UIElements {
                                 //scope.launch { scaffoldState.drawerState.open() }
                             }
                         ) {
-                            Icon(Icons.Filled.Menu,"")
+                            Icon(Icons.Filled.Menu, "")
                         }
                     }
                 },
@@ -58,7 +62,7 @@ class UIElements {
                 drawerContent = { Text(text = "drawerContent") },
                 content = {
                     Column() {
-                        WelcomeCard()
+//                        WelcomeCard()
                         addSearchBox()
                         loadList()
                     }
@@ -72,21 +76,27 @@ class UIElements {
         @Composable
         fun loadList() {
             val scrollState = rememberScrollState()
+            val painter = painterResource(id = com.relsellglobal.kotlinhiltdemo.R.drawable.ic_launcher_background)
+            val description = "Hello painter"
+            val title = "Book title"
+
             Column(
                 modifier = Modifier.verticalScroll(scrollState)
             ) {
                 for (i in 1..50) {
-                    Text(
-                        text = "Item $i",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 24.dp)
-
-
-                    )
+                    ImageCard(painter = painter, contentDescription = description,title=title)
+//                    BooksIndividualItemUI()
+//                    Text(
+//                        text = "Item $i",
+//                        fontSize = 24.sp,
+//                        fontWeight = FontWeight.Bold,
+//                        textAlign = TextAlign.Center,
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .padding(vertical = 24.dp)
+//
+//
+//                    )
                 }
 
             }
@@ -95,16 +105,15 @@ class UIElements {
         @Composable
         fun addSearchBox() {
             var text by remember { mutableStateOf(TextFieldValue("")) }
-            Row (modifier = Modifier.padding(start=16.dp,end=16.dp,top = 16.dp)) {
+            Row(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp)) {
 
                 OutlinedTextField(
                     modifier = Modifier
-                        .fillMaxWidth()
-                    ,
+                        .fillMaxWidth(),
                     shape = RoundedCornerShape(8.dp),
                     singleLine = true,
                     placeholder = { Text("Enter Search term") },
-                    label  = { Text("Enter Search term") },
+                    label = { Text("Enter Search term") },
                     value = text,
                     onValueChange = { newText ->
                         text = newText
@@ -112,9 +121,6 @@ class UIElements {
                 )
 
                 //removedRowLayoutSearchbox()
-
-
-
 
 
             }
@@ -179,7 +185,8 @@ class UIElements {
                     Text(
                         buildAnnotatedString {
                             append("Welcome to ")
-                            withStyle(style = SpanStyle(fontWeight = FontWeight.W900, color = Color(0xFF4552B8))
+                            withStyle(
+                                style = SpanStyle(fontWeight = FontWeight.W900, color = Color(0xFF4552B8))
                             ) {
                                 append("Book Search App")
                             }
@@ -196,6 +203,82 @@ class UIElements {
                     )
                 }
             }
+        }
+
+        @Composable
+        fun BooksIndividualItemUI() {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(15.dp)
+                    .clickable { },
+                elevation = 10.dp
+            ) {
+                Column(
+                    modifier = Modifier.padding(15.dp)
+                ) {
+                    Text(
+                        buildAnnotatedString {
+                            append("Welcome to ")
+                            withStyle(
+                                style = SpanStyle(fontWeight = FontWeight.W900, color = Color(0xFF4552B8))
+                            ) {
+                                append("Book Search App")
+                            }
+                        }
+                    )
+                    Text(
+                        buildAnnotatedString {
+                            append("You can search ")
+                            withStyle(style = SpanStyle(fontWeight = FontWeight.W900)) {
+                                append("books")
+                            }
+                            append(" here")
+                        }
+                    )
+                }
+            }
+        }
+
+        @Composable
+        fun ImageCard(
+            painter: Painter,
+            contentDescription: String,
+            title: String,
+            modifier: Modifier = Modifier
+        ) {
+            Column ( modifier = Modifier.padding(16.dp)) {
+
+
+
+
+                Card(
+                    modifier = modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(2.dp),
+                    elevation = 5.dp
+                ) {
+                    // when we want to put content stack over each other
+                    Box(modifier = Modifier.height(90.dp).padding(5.dp)) {
+                        Image(
+                            modifier = Modifier
+                                .width(64.dp)
+                                .fillMaxHeight(),
+                            painter = painter,
+                            contentDescription = contentDescription,
+                            contentScale = ContentScale.Crop
+                        )
+                        Box(
+                            modifier = Modifier
+                                .width(64.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(title, style = TextStyle(color = Color.White, fontSize = 12.sp))
+                        }
+                    }
+
+                }
+            }
+
         }
 
 

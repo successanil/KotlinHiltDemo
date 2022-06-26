@@ -29,6 +29,8 @@ import android.util.Log
 import com.relsellglobal.kotlinhiltdemo.R
 import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
 import com.relsellglobal.kotlinhiltdemo.repositories.network.VolumeInfo
+import com.skydoves.landscapist.CircularReveal
+import com.skydoves.landscapist.glide.GlideImage
 
 
 class UIElements {
@@ -109,10 +111,10 @@ class UIElements {
 
                     Column( modifier = Modifier.verticalScroll(scrollState) ) {
 //                        WelcomeCard()
-                        ImageCardWithNetworkData(
-                            painter = painter, contentDescription = description,
-                            title = title
-                        )
+//                        ImageCardWithNetworkData(
+//                            painter = painter, contentDescription = description,
+//                            title = title
+//                        )
 
                     }
                 },
@@ -379,6 +381,7 @@ class UIElements {
         fun ImageCardWithNetworkData(
             painter: Painter,
             contentDescription: String,
+            imageUrl:String,
             title: String,
             modifier: Modifier = Modifier
         ) {
@@ -399,21 +402,37 @@ class UIElements {
                                 .height(90.dp)
                                 .padding(5.dp)
                         ) {
-                            Image(
+//                            Image(
+//                                modifier = Modifier
+//                                    .width(64.dp)
+//                                    .clip(RoundedCornerShape(5.dp))
+//                                    .fillMaxHeight(),
+//                                painter = painter,
+//                                contentDescription = contentDescription,
+//                                contentScale = ContentScale.Crop
+//                            )
+
+                            GlideImage(
+                                imageModel = imageUrl,
                                 modifier = Modifier
                                     .width(64.dp)
                                     .clip(RoundedCornerShape(5.dp))
                                     .fillMaxHeight(),
-                                painter = painter,
-                                contentDescription = contentDescription,
-                                contentScale = ContentScale.Crop
+                                // Crop, Fit, Inside, FillHeight, FillWidth, None
+                                contentScale = ContentScale.Crop,
+                                // shows an image with a circular revealed animation.
+                                circularReveal = CircularReveal(duration = 250),
+                                // shows a placeholder ImageBitmap when loading.
+                                //placeHolder = ImageBitmap.imageResource(R.drawable.placeholder),
+                                // shows an error ImageBitmap when the request failed.
+                                //error = ImageBitmap.imageResource(R.drawable.error)
                             )
                             Box(
                                 modifier = Modifier
                                     .width(64.dp),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Text(title, style = TextStyle(color = Color.White, fontSize = 12.sp))
+//                                Text(title, style = TextStyle(color = Color.White, fontSize = 12.sp))
                             }
                         }
                         Spacer(modifier = Modifier.width(5.dp))

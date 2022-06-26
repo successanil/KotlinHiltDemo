@@ -102,9 +102,12 @@ class ComposeDemoFrgment constructor(val bookListModel: BookListModel) : Fragmen
 //                        val scrollState = rememberScrollState()
                                 val painter = painterResource(id = R.drawable.ic_launcher_background)
                                 val description = "Hello painter"
+                                val imageUrlThubmnail = response.volumeInfo.imageLinks.smallThumbnail
                                 val title = response.volumeInfo.title
                                 UIElements.ImageCardWithNetworkData(
-                                    painter = painter, contentDescription = description,
+                                    painter = painter,
+                                    contentDescription = description,
+                                    imageUrl = imageUrlThubmnail,
                                     title = title
                                 )
 

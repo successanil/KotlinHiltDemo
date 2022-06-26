@@ -7,14 +7,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -23,7 +22,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -84,7 +82,7 @@ class UIElements {
                 modifier = Modifier.verticalScroll(scrollState)
             ) {
                 for (i in 1..50) {
-                    ImageCard(painter = painter, contentDescription = description,title=title)
+                    ImageCard(painter = painter, contentDescription = description, title = title)
 //                    BooksIndividualItemUI()
 //                    Text(
 //                        text = "Item $i",
@@ -247,9 +245,7 @@ class UIElements {
             title: String,
             modifier: Modifier = Modifier
         ) {
-            Column ( modifier = Modifier.padding(16.dp)) {
-
-
+            Column(modifier = Modifier.padding(16.dp)) {
 
 
                 Card(
@@ -257,23 +253,74 @@ class UIElements {
                     shape = RoundedCornerShape(2.dp),
                     elevation = 5.dp
                 ) {
-                    // when we want to put content stack over each other
-                    Box(modifier = Modifier.height(90.dp).padding(5.dp)) {
-                        Image(
-                            modifier = Modifier
-                                .width(64.dp)
-                                .clip(RoundedCornerShape(5.dp))
-                                .fillMaxHeight(),
-                            painter = painter,
-                            contentDescription = contentDescription,
-                            contentScale = ContentScale.Crop
-                        )
+                    Row(modifier = Modifier.fillMaxWidth()) {
+
+
+                        // when we want to put content stack over each other
                         Box(
                             modifier = Modifier
-                                .width(64.dp),
-                            contentAlignment = Alignment.Center
+                                .height(90.dp)
+                                .padding(5.dp)
                         ) {
-                            Text(title, style = TextStyle(color = Color.White, fontSize = 12.sp))
+                            Image(
+                                modifier = Modifier
+                                    .width(64.dp)
+                                    .clip(RoundedCornerShape(5.dp))
+                                    .fillMaxHeight(),
+                                painter = painter,
+                                contentDescription = contentDescription,
+                                contentScale = ContentScale.Crop
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .width(64.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(title, style = TextStyle(color = Color.White, fontSize = 12.sp))
+                            }
+                        }
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Column(
+
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                            ) {
+
+
+                                Text("The Business Book", style = TextStyle(color = Color.Black, fontSize = 16.sp))
+                                Text("Big Ideas Simply Explained", style = TextStyle(color = Color.Gray, fontSize = 10.sp))
+                            }
+                            
+                            Spacer(modifier = Modifier.height(2.dp))
+
+                            Row(
+
+                            ) {
+
+                                Column( horizontalAlignment = Alignment.CenterHorizontally) {
+
+                                    Button(
+                                        onClick = { /* ... */ },
+                                        // Uses ButtonDefaults.ContentPadding by default
+//                                        contentPadding = PaddingValues(
+//                                            start = 20.dp,
+//                                            top = 12.dp,
+//                                            end = 20.dp,
+//                                            bottom = 12.dp
+//                                        )
+                                    ) {
+                                        // Inner content including an icon and a text label
+                                        Icon(
+                                            Icons.Filled.Done,
+                                            contentDescription = "Details",
+                                            modifier = Modifier.size(ButtonDefaults.IconSize)
+                                        )
+                                        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                                        Text("Details")
+                                    }
+                                }
+                            }
                         }
                     }
 

@@ -25,6 +25,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import android.util.Log
 
 
 class UIElements {
@@ -301,13 +302,8 @@ class UIElements {
                                 Column( horizontalAlignment = Alignment.CenterHorizontally) {
 
                                     Button(
-                                        onClick = { /* ... */ },
-                                        // Uses ButtonDefaults.ContentPadding by default
-//                                        contentPadding = PaddingValues(
-//                                            start = 20.dp,
-//                                            top = 12.dp,
-//                                            end = 20.dp,
-//                                            bottom = 12.dp
+                                        onClick = {  launchCheck() },
+
 //                                        )
                                     ) {
                                         // Inner content including an icon and a text label
@@ -329,8 +325,14 @@ class UIElements {
 
         }
 
+        private fun launchCheck() {
+            Log.v("TAG","launchCheck")
+        }
+
 
     }
+
+
 
 }
 

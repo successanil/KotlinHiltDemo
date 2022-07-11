@@ -6,6 +6,7 @@ import com.relsellglobal.kotlinhiltdemo.repositories.network.BookInfo
 import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
 import com.relsellglobal.kotlinhiltdemo.repositories.network.VolumeInfo
 import com.relsellglobal.networklib.apiservice.BooksApiService
+import com.relsellglobal.networklib.fakes.FakeBookApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,6 +14,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -50,7 +52,9 @@ object AppModule {
     @Singleton
     @Provides
     fun providesBooksApiService(retrofit: Retrofit) : BooksApiService {
-        return retrofit.create(BooksApiService::class.java)
+//        return retrofit.create(BooksApiService::class.java)
+        //return retrofit.create(FakeBookApiService::class.java)
+        return FakeBookApiService()
     }
 
 }

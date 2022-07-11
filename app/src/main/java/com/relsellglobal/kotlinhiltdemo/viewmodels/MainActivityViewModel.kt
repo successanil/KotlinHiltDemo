@@ -4,8 +4,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.relsellglobal.kotlinhiltdemo.repositories.BooksApiRepository
 import com.relsellglobal.kotlinhiltdemo.util.ApiState
+import com.relsellglobal.repositorylib.BooksApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map

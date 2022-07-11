@@ -1,4 +1,4 @@
-package com.relsellglobal.kotlinhiltdemo.repositories
+package com.relsellglobal.repositorylib
 
 import com.relsellglobal.networklib.apiservice.BooksApiService
 import kotlinx.coroutines.Dispatchers

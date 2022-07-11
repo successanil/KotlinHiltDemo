@@ -26,6 +26,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
 import com.relsellglobal.kotlinhiltdemo.R
 import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
 import com.relsellglobal.kotlinhiltdemo.repositories.network.VolumeInfo
@@ -402,7 +403,8 @@ class UIElements {
                             ) {
 
                                 Column(
-                                    modifier = Modifier.background(Color.LightGray)
+                                    modifier = Modifier
+                                        .background(Color.LightGray)
                                         .fillMaxWidth()
                                         .height(1.dp)
                                 ) {
@@ -523,8 +525,33 @@ class UIElements {
             Log.v("TAG","launchCheck")
         }
 
+        @Composable
+        fun JetpackCompose() {
+            Card (modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth()
+                .background(Color.White)) {
+                var expanded by remember { mutableStateOf(false)}
+                Column(Modifier.clickable { },
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally){
+                    Image(painterResource(id = R.drawable.ic_launcher_background),"",Modifier.clickable { expanded = !expanded
+                    })
+                    AnimatedVisibility(visible = expanded) {
+                        Text(
+                            text = "Anil Kukreti",
+                            style= MaterialTheme.typography.h2)
+                    }
+                }
+
+            }
+        }
+
 
     }
+
+
+
 
 
 

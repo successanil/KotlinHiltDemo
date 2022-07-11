@@ -32,6 +32,7 @@ import androidx.fragment.app.viewModels
 import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
 import com.relsellglobal.kotlinhiltdemo.uicomponents.DrawerHeader
 import com.relsellglobal.kotlinhiltdemo.uicomponents.UIElements
+import com.relsellglobal.kotlinhiltdemo.uicomponents.UIElements.Companion.JetpackCompose
 import com.relsellglobal.kotlinhiltdemo.util.ApiState
 import com.relsellglobal.kotlinhiltdemo.viewmodels.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,6 +55,7 @@ class ComposeDemoFrgment constructor(val bookListModel: BookListModel) : Fragmen
 
             setContent {
                 MaterialTheme {
+//                    JetpackCompose()
                     GetBooksList(mainActivityViewModel = viewModel)
 //                    UIElements.ScaffoldDemo()
                 }

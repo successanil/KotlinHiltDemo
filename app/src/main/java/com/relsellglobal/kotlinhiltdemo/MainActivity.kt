@@ -24,6 +24,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        var t = TestClass()
+//        t.createThread()
+
+
+
+
+
         supportFragmentManager.beginTransaction().replace(R.id.rootL, fragmentFactory.instantiate(
             classLoader,
             ComposeDemoFrgment::class.java.getName()

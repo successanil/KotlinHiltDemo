@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -16,9 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.toColorInt
 import com.relsellglobal.kotlinhiltdemo.uicomponents.DrawerHeader
 import com.relsellglobal.kotlinhiltdemo.uicomponents.UIElements
 import com.relsellglobal.kotlinhiltdemo.util.ApiState
@@ -46,7 +49,10 @@ class HomeList {
 
                     val materialBlue700 = Color(0xFF1976D2)
                     val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
+                    val colorOne = Color(0xFF20014D)
+                    val colorTwo = Color(0xFF24123D)
                     Scaffold(
+                        backgroundColor = colorOne,
                         scaffoldState = scaffoldState,
                         topBar = {
                             TopAppBar(
@@ -102,27 +108,33 @@ class HomeList {
                             val painter = painterResource(id = R.drawable.ic_launcher_background)
                             val description = "Hello painter"
 
+                            Column(modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Brush.horizontalGradient(0f to colorOne, 1000f to colorTwo))
 
-//                        WelcomeCard()
-                            LazyColumn {
-                                items(result.data) { response ->
-                                    // each row (response)
+                            ) {
+                                LazyColumn {
+                                    items(result.data) { response ->
+                                        // each row (response)
 //                        val scrollState = rememberScrollState()
-                                    val painter = painterResource(id = R.drawable.ic_launcher_background)
-                                    val description = "Hello painter"
-                                    val imageUrlThubmnail = response.volumeInfo.imageLinks.smallThumbnail
-                                    val title = response.volumeInfo.title
-                                    UIElements.ImageCardWithNetworkData(
-                                        painter = painter,
-                                        contentDescription = description,
-                                        imageUrl = imageUrlThubmnail,
-                                        title = title
-                                    )
+                                        val painter = painterResource(id = R.drawable.ic_launcher_background)
+                                        val description = "Hello painter"
+                                        val imageUrlThubmnail = response.volumeInfo.imageLinks.smallThumbnail
+                                        val title = response.volumeInfo.title
+                                        UIElements.ImageCardWithNetworkData(
+                                            painter = painter,
+                                            contentDescription = description,
+                                            imageUrl = imageUrlThubmnail,
+                                            title = title
+                                        )
 
+
+                                    }
 
                                 }
-
                             }
+
+
                         },
                         bottomBar = {
 //                    BottomAppBar(backgroundColor = materialBlue700) { Text("BottomAppBar") }

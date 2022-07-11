@@ -21,12 +21,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.toColorInt
+import com.relsellglobal.kotlinhiltdemo.R
 import com.relsellglobal.kotlinhiltdemo.uicomponents.DrawerHeader
 import com.relsellglobal.kotlinhiltdemo.uicomponents.UIElements
 import com.relsellglobal.kotlinhiltdemo.util.ApiState
 import com.relsellglobal.kotlinhiltdemo.viewmodels.MainActivityViewModel
-import com.relsellglobal.kotlinhiltdemo.R
 
 class HomeList {
     companion object {

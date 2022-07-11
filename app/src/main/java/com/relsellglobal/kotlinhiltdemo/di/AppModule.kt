@@ -52,9 +52,8 @@ object AppModule {
     @Singleton
     @Provides
     fun providesBooksApiService(retrofit: Retrofit) : BooksApiService {
-//        return retrofit.create(BooksApiService::class.java)
-        //return retrofit.create(FakeBookApiService::class.java)
-        return FakeBookApiService()
+        return retrofit.create(BooksApiService::class.java)
+//        return FakeBookApiService()
     }
 
 }

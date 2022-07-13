@@ -1,11 +1,9 @@
 package com.relsellglobal.kotlinhiltdemo
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import com.relsellglobal.jpcloginmod.LoginActivity
 import com.relsellglobal.kotlinhiltdemo.viewmodels.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -24,16 +22,16 @@ class MainActivity : AppCompatActivity() {
 //        var t = TestClass()
 //        t.createThread()
 
-        startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+//        startActivity(Intent(this@MainActivity, LoginActivity::class.java))
 
 
 
 
 
-//        supportFragmentManager.beginTransaction().replace(R.id.rootL, fragmentFactory.instantiate(
-//            classLoader,
-//            ComposeDemoFrgment::class.java.getName()
-//        )).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.rootL, fragmentFactory.instantiate(
+            classLoader,
+            ComposeDemoFrgment::class.java.getName()
+        )).commit()
 
     }
 }

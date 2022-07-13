@@ -1,12 +1,13 @@
 package com.relsellglobal.kotlinhiltdemo.di
 
 import android.content.Context
+import com.relsellglobal.domainlib.appinterfaces.IGWeatherDataFetchUseCase
+import com.relsellglobal.domainlib.usecases.WeatherDataFetchUseCase
 import com.relsellglobal.kotlinhiltdemo.BaseApplication
-import com.relsellglobal.kotlinhiltdemo.repositories.network.BookInfo
-import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
-import com.relsellglobal.kotlinhiltdemo.repositories.network.VolumeInfo
+import com.relsellglobal.modelslib.BookListModel
+import com.relsellglobal.modelslib.VolumeInfo
 import com.relsellglobal.networklib.apiservice.BooksApiService
-import com.relsellglobal.networklib.fakes.FakeBookApiService
+import com.relsellglobal.repositorylib.BooksApiRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +15,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -54,6 +54,19 @@ object AppModule {
     fun providesBooksApiService(retrofit: Retrofit) : BooksApiService {
         return retrofit.create(BooksApiService::class.java)
 //        return FakeBookApiService()
+    }
+
+
+    @Singleton
+    @Provides
+    fun providesBooksApiRepository(booksApiService: BooksApiService) : BooksApiRepository{
+        return BooksApiRepository(booksApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideIGWeatherDataUseCase(booksApiRepository: BooksApiRepository) : IGWeatherDataFetchUseCase {
+        return WeatherDataFetchUseCase(booksApiRepository)
     }
 
 }

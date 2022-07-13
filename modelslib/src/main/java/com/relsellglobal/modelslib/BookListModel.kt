@@ -1,4 +1,4 @@
-package com.relsellglobal.kotlinhiltdemo.repositories.network
+package com.relsellglobal.modelslib
 
 data class BookListModel(val items: ArrayList<VolumeInfo>)
 data class VolumeInfo(val volumeInfo: BookInfo)

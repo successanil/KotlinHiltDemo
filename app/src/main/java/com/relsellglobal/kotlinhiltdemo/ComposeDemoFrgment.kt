@@ -9,9 +9,9 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.relsellglobal.flowdemoapplication.ui.theme.JetpackComposeDemoTheme
-import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
-import com.relsellglobal.kotlinhiltdemo.ui.screens.ScreenMain
+import com.relsellglobal.kotlinhiltdemo.uicomponents.home.HomeList.Companion.GetBooksList
 import com.relsellglobal.kotlinhiltdemo.viewmodels.MainActivityViewModel
+import com.relsellglobal.modelslib.BookListModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,9 +32,9 @@ class ComposeDemoFrgment constructor(val bookListModel: BookListModel) : Fragmen
             setContent {
                 JetpackComposeDemoTheme {
 //                    JetpackCompose()
-                    //GetBooksList(mainActivityViewModel = viewModel)
+                    GetBooksList(mainActivityViewModel = viewModel)
 //                    UIElements.ScaffoldDemo()
-                    ScreenMain()
+                    //ScreenMain()
                 }
             }
         }

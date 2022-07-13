@@ -1,9 +1,9 @@
 package com.relsellglobal.networklib.fakes
 
-import com.relsellglobal.kotlinhiltdemo.repositories.network.BookInfo
-import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
-import com.relsellglobal.kotlinhiltdemo.repositories.network.ImageLinks
-import com.relsellglobal.kotlinhiltdemo.repositories.network.VolumeInfo
+import com.relsellglobal.modelslib.BookInfo
+import com.relsellglobal.modelslib.BookListModel
+import com.relsellglobal.modelslib.ImageLinks
+import com.relsellglobal.modelslib.VolumeInfo
 import com.relsellglobal.networklib.apiservice.BooksApiService
 
 

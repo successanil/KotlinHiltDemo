@@ -1,7 +1,7 @@
 package com.relsellglobal.kotlinhiltdemo.util
 
-import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
-import com.relsellglobal.kotlinhiltdemo.repositories.network.VolumeInfo
+import com.relsellglobal.modelslib.VolumeInfo
+
 
 sealed class ApiState {
     class Success(val data:List<VolumeInfo>) : ApiState()

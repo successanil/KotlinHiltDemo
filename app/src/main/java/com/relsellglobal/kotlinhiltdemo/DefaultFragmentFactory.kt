@@ -2,7 +2,7 @@ package com.relsellglobal.kotlinhiltdemo
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
+import com.relsellglobal.modelslib.BookListModel
 import javax.inject.Inject
 class DefaultFragmentFactory @Inject constructor(
     val bookListModel: BookListModel

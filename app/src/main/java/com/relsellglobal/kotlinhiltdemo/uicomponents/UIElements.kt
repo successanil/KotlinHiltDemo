@@ -28,8 +28,6 @@ import androidx.compose.ui.unit.sp
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import com.relsellglobal.kotlinhiltdemo.R
-import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
-import com.relsellglobal.kotlinhiltdemo.repositories.network.VolumeInfo
 import com.skydoves.landscapist.CircularReveal
 import com.skydoves.landscapist.glide.GlideImage
 

@@ -1,6 +1,7 @@
 package com.relsellglobal.networklib.apiservice
 
-import com.relsellglobal.kotlinhiltdemo.repositories.network.BookListModel
+
+import com.relsellglobal.modelslib.BookListModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

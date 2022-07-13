@@ -85,6 +85,7 @@ dependencies {
     implementation project(":repositorylib")
     implementation project(":networklib")
     implementation project(":modelslib")
+    implementation project(":jpcloginmod")
 
 
 
